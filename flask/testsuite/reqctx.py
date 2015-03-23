@@ -33,6 +33,22 @@ class RequestContextTestCase(FlaskTestCase):
         ctx.pop()
         self.assert_equal(buffer, [None])
 
+    def test_teardown_with_handled_exception():
+        buffer = []
+        app = flask.Flask(__name__)
+
+        @app.teardown_request
+        def end_of_request(exception):
+            buffer.append(exception)
+
+        with app.test_request_context():
+            assert buffer == []
+            try:
+                raise Exception('dummy')
+            except Exception:
+                pass
+        assert buffer == [None]
+
     def test_proper_test_request_context(self):
         app = flask.Flask(__name__)
         app.config.update(
