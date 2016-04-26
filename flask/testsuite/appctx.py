@@ -63,7 +63,7 @@ class AppContextTestCase(FlaskTestCase):
 
         self.assert_equal(cleanup_stuff, [None])
 
-    def test_app_tearing_down_with_handled_exception():
+    def test_app_tearing_down_with_handled_exception(self):
         cleanup_stuff = []
         app = flask.Flask(__name__)
 

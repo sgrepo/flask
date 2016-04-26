@@ -33,7 +33,7 @@ class RequestContextTestCase(FlaskTestCase):
         ctx.pop()
         self.assert_equal(buffer, [None])
 
-    def test_teardown_with_handled_exception():
+    def test_teardown_with_handled_exception(self):
         buffer = []
         app = flask.Flask(__name__)
 
